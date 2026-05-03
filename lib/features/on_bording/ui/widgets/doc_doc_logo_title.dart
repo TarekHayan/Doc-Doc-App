@@ -7,6 +7,6 @@ class DocDocLogoTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: SvgPicture.asset(ImagesAssets.assetsDocDocIcon));
+    return Center(child: SvgPicture.asset(Assets.assetsImagesDocDocIcon));
   }
 }

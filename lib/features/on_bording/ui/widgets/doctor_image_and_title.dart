@@ -12,7 +12,7 @@ class DoctorImageAndTitle extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          SvgPicture.asset(ImagesAssets.assetsDocBackground),
+          SvgPicture.asset(Assets.assetsImagesDocBackground),
           Container(
             foregroundDecoration: BoxDecoration(
               gradient: LinearGradient(
@@ -22,7 +22,7 @@ class DoctorImageAndTitle extends StatelessWidget {
                 stops: [0.14, 0.4],
               ),
             ),
-            child: Image.asset(ImagesAssets.assetsDoctorImage),
+            child: Image.asset(Assets.assetsImagesDoctorImage),
           ),
           Positioned(
             bottom: 12.h,
