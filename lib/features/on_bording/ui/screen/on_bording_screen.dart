@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/features/on_bording/ui/widgets/doc_doc_logo_title.dart';
 import 'package:project_app/features/on_bording/ui/widgets/doctor_image_and_title.dart';
 import 'package:project_app/features/on_bording/ui/widgets/text_and_button.dart';
@@ -19,9 +20,9 @@ class OnBordingScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 DocDocLogoTitle(),
-                SizedBox(height: 41.h),
+                vSpace(41),
                 DoctorImageAndTitle(),
-                SizedBox(height: 18.h),
+                vSpace(18),
                 TextAndButton(),
               ],
             ),
