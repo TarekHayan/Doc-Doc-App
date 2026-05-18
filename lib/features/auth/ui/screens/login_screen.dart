@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_app/core/helper/nav_extension.dart';
 import 'package:project_app/core/helper/spacing.dart';
-import 'package:project_app/core/routes/routes.dart';
 import 'package:project_app/core/widgets/app_custom_elvated_button.dart';
+import 'package:project_app/features/auth/data/models/login_request_body.dart';
+import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/end_screen.dart';
 import 'package:project_app/features/auth/ui/widgets/input_user_data.dart';
+import 'package:project_app/features/auth/ui/widgets/login_bloc_listener.dart';
 import 'package:project_app/features/auth/ui/widgets/login_screen_header.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-  final form = GlobalKey<FormState>();
+  const LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,21 +27,33 @@ class LoginScreen extends StatelessWidget {
                       'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
                 ),
                 vSpace(36),
-                InputUserData(form: form),
+                const InputUserData(),
                 vSpace(41),
                 CustomElevatedButton(
                   title: "Login",
                   onPressed: () {
-                    context.navigateTo(routeName: Routes.home);
+                    _validateAndLogin(context);
                   },
                 ),
                 vSpace(32),
                 EndScreen(),
+                LoginBlockListener(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _validateAndLogin(BuildContext context) {
+    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubit>().emitLoginState(
+        LoginRequestBody(
+          email: context.read<LoginCubit>().emailController.text,
+          password: context.read<LoginCubit>().passwordController.text,
+        ),
+      );
+    }
   }
 }
