@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     required this.validator,
     this.errorBorder,
     this.focusedErrorBorder,
+    this.keyboardType,
   });
   final String hintText;
   final bool isObscureText;
@@ -32,9 +33,11 @@ class CustomTextField extends StatelessWidget {
   final IconButton? obscureTextIconButton;
   final TextEditingController? controller;
   final String? Function(String?) validator;
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       validator: (value) {
         return validator(value);
       },

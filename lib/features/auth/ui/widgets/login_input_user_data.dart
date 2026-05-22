@@ -6,10 +6,9 @@ import 'package:project_app/core/styles/app_colors.dart';
 import 'package:project_app/core/styles/app_fonts.dart';
 import 'package:project_app/core/widgets/app_custom_text_field.dart';
 import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
-import 'package:project_app/features/auth/ui/widgets/password_validations.dart';
 
-class InputUserData extends StatelessWidget {
-  const InputUserData({super.key});
+class LogInInputUserData extends StatelessWidget {
+  const LogInInputUserData({super.key});
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,7 +18,6 @@ class InputUserData extends StatelessWidget {
           EmailTextField(),
           vSpace(16),
           PasswordTextField(),
-          vSpace(16),
           ForgetPasswordTextButton(),
         ],
       ),
@@ -50,26 +48,6 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  @override
-  void initState() {
-    context.read<LoginCubit>().passwordController.addListener(() {
-      final password = context.read<LoginCubit>().passwordController.text;
-      setState(() {
-        hasLowerCase = AppRegex.hasLowerCase(password);
-        hasUpperCase = AppRegex.hasUpperCase(password);
-        hasSpecialCharacters = AppRegex.hasSpecialCharacter(password);
-        hasNumber = AppRegex.hasNumber(password);
-        hasMinLength = AppRegex.hasMinLength(password);
-      });
-    });
-    super.initState();
-  }
-
-  bool hasLowerCase = false;
-  bool hasUpperCase = false;
-  bool hasSpecialCharacters = false;
-  bool hasNumber = false;
-  bool hasMinLength = false;
   bool isObscureText = false;
 
   @override
@@ -97,21 +75,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             if (value == null || value.isEmpty) {
               return "Password is required";
             }
-            if (!AppRegex.isPasswordValid(value)) {
-              return "Password does not meet the requirements";
-            }
 
             return null;
           },
         ),
         vSpace(24),
-        PasswordValidations(
-          hasLowerCase: hasLowerCase,
-          hasUpperCase: hasUpperCase,
-          hasSpecialCharacters: hasSpecialCharacters,
-          hasNumber: hasNumber,
-          hasMinLength: hasMinLength,
-        ),
       ],
     );
   }
