@@ -4,6 +4,7 @@ import 'package:project_app/core/di/dependecy_injection.dart';
 import 'package:project_app/core/routes/routes.dart';
 import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
 import 'package:project_app/features/auth/ui/screens/login_screen.dart';
+import 'package:project_app/features/auth/ui/screens/sigin_up_screen.dart';
 import 'package:project_app/features/home/ui/screens/home_screen.dart';
 import 'package:project_app/features/on_bording/ui/screen/on_bording_screen.dart';
 
@@ -21,6 +22,8 @@ class AppRouter {
             child: LoginScreen(),
           ),
         );
+      case Routes.register:
+        return MaterialPageRoute(builder: (_) => const SiginUpScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

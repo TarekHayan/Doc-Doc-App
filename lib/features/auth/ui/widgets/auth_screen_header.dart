@@ -3,8 +3,8 @@ import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/core/styles/app_colors.dart';
 import 'package:project_app/core/styles/app_fonts.dart';
 
-class LoginScreenHeader extends StatelessWidget {
-  const LoginScreenHeader({super.key, required this.title, required this.desc});
+class AuthScreenHeader extends StatelessWidget {
+  const AuthScreenHeader({super.key, required this.title, required this.desc});
   final String title, desc;
   @override
   Widget build(BuildContext context) {

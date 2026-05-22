@@ -6,9 +6,9 @@ import 'package:project_app/core/widgets/app_custom_elvated_button.dart';
 import 'package:project_app/features/auth/data/models/login_request_body.dart';
 import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/end_screen.dart';
-import 'package:project_app/features/auth/ui/widgets/input_user_data.dart';
+import 'package:project_app/features/auth/ui/widgets/login_input_user_data.dart';
 import 'package:project_app/features/auth/ui/widgets/login_bloc_listener.dart';
-import 'package:project_app/features/auth/ui/widgets/login_screen_header.dart';
+import 'package:project_app/features/auth/ui/widgets/auth_screen_header.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -21,13 +21,13 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const LoginScreenHeader(
+                const AuthScreenHeader(
                   title: r'Welcome Back',
                   desc:
                       'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
                 ),
                 vSpace(36),
-                const InputUserData(),
+                const LogInInputUserData(),
                 vSpace(41),
                 CustomElevatedButton(
                   title: "Login",
@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 vSpace(32),
-                EndScreen(),
+                EndScreen(isLoginScreen: true),
                 LoginBlockListener(),
               ],
             ),
