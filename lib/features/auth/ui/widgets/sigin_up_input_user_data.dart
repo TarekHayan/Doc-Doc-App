@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_app/core/helper/app_regex.dart';
 import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/core/styles/app_colors.dart';
 import 'package:project_app/core/widgets/app_custom_text_field.dart';
+import 'package:project_app/features/auth/logic/cubit/signup_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/custom_drop_dowen.dart';
 import 'package:project_app/features/auth/ui/widgets/password_validations.dart';
 
 class SiginUpInputUserData extends StatelessWidget {
-  SiginUpInputUserData({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  const SiginUpInputUserData({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: context.read<SignupCubit>().formKey,
       child: Column(
         children: [
           NameTextField(),
@@ -41,32 +42,34 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  // void initState() {
-  //   context.read<LoginCubit>().passwordController.addListener(() {
-  //     final password = context.read<LoginCubit>().passwordController.text;
-  //     setState(() {
-  //       hasLowerCase = AppRegex.hasLowerCase(password);
-  //       hasUpperCase = AppRegex.hasUpperCase(password);
-  //       hasSpecialCharacters = AppRegex.hasSpecialCharacter(password);
-  //       hasNumber = AppRegex.hasNumber(password);
-  //       hasMinLength = AppRegex.hasMinLength(password);
-  //     });
-  //   });
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    context.read<SignupCubit>().passwordController.addListener(() {
+      final password = context.read<SignupCubit>().passwordController.text;
+      setState(() {
+        hasLowerCase = AppRegex.hasLowerCase(password);
+        hasUpperCase = AppRegex.hasUpperCase(password);
+        hasSpecialCharacters = AppRegex.hasSpecialCharacter(password);
+        hasNumber = AppRegex.hasNumber(password);
+        hasMinLength = AppRegex.hasMinLength(password);
+      });
+    });
+    super.initState();
+  }
+
   bool hasLowerCase = false;
   bool hasUpperCase = false;
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
   bool hasMinLength = false;
-  bool isObscureText = false;
+  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomTextField(
-          // controller: context.read<LoginCubit>().passwordController,
+          controller: context.read<SignupCubit>().passwordController,
           hintText: "Password",
           isObscureText: isObscureText,
           suffixIcon: IconButton(
@@ -76,10 +79,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               });
             },
             icon: Icon(
-              isObscureText ? Icons.visibility : Icons.visibility_off,
+              isObscureText ? Icons.visibility_off : Icons.visibility,
               color: isObscureText
-                  ? AppColors.primaryColorBlue
-                  : AppColors.greyColor,
+                  ? AppColors.greyColor
+                  : AppColors.primaryColorBlue,
             ),
           ),
           validator: (value) {
@@ -112,7 +115,7 @@ class NameTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      // controller: context.read<LoginCubit>().emailController,
+      controller: context.read<SignupCubit>().nameController,
       hintText: "Name",
       isObscureText: false,
       validator: (value) {
@@ -120,7 +123,7 @@ class NameTextField extends StatelessWidget {
           return "Name is required";
         }
         if (!AppRegex.hasMinLength(value)) {
-          return "Please enter a name with at least 8 characters";
+          return "Please enter first and last name";
         }
         return null;
       },
@@ -134,7 +137,7 @@ class PhoneTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      // controller: context.read<LoginCubit>().emailController,
+      controller: context.read<SignupCubit>().phoneController,
       hintText: "Phone",
       isObscureText: false,
       keyboardType: TextInputType.phone,
@@ -166,7 +169,7 @@ class EmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      // controller: context.read<LoginCubit>().emailController,
+      controller: context.read<SignupCubit>().emailController,
       hintText: "Email",
       isObscureText: false,
       validator: (value) {
@@ -184,21 +187,20 @@ class EmailTextField extends StatelessWidget {
 
 class ConfirmPasswordTextField extends StatefulWidget {
   const ConfirmPasswordTextField({super.key});
-
   @override
   State<ConfirmPasswordTextField> createState() =>
       _ConfirmPasswordTextFieldState();
 }
 
 class _ConfirmPasswordTextFieldState extends State<ConfirmPasswordTextField> {
-  bool isObscureText = false;
+  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomTextField(
-          // controller: context.read<LoginCubit>().passwordController,
+          controller: context.read<SignupCubit>().confirmPasswordController,
           hintText: "Confirm Password",
           isObscureText: isObscureText,
           suffixIcon: IconButton(
@@ -208,15 +210,27 @@ class _ConfirmPasswordTextFieldState extends State<ConfirmPasswordTextField> {
               });
             },
             icon: Icon(
-              isObscureText ? Icons.visibility : Icons.visibility_off,
+              isObscureText ? Icons.visibility_off : Icons.visibility,
               color: isObscureText
-                  ? AppColors.primaryColorBlue
-                  : AppColors.greyColor,
+                  ? AppColors.greyColor
+                  : AppColors.primaryColorBlue,
             ),
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "Password is required";
+            }
+
+            final password = context
+                .read<SignupCubit>()
+                .passwordController
+                .text
+                .trim();
+
+            final confirmPassword = value.trim();
+
+            if (confirmPassword != password) {
+              return "Passwords do not match";
             }
 
             return null;

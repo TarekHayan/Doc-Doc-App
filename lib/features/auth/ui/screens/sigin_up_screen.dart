@@ -1,10 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/core/widgets/app_custom_elvated_button.dart';
+import 'package:project_app/features/auth/data/models/login_request_body.dart';
+import 'package:project_app/features/auth/data/models/signup_request_body.dart';
+import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
+import 'package:project_app/features/auth/logic/cubit/signup_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/end_screen.dart';
 import 'package:project_app/features/auth/ui/widgets/auth_screen_header.dart';
 import 'package:project_app/features/auth/ui/widgets/sigin_up_input_user_data.dart';
+import 'package:project_app/features/auth/ui/widgets/signup_bloc_listener.dart';
 
 class SiginUpScreen extends StatelessWidget {
   const SiginUpScreen({super.key});
@@ -26,14 +34,26 @@ class SiginUpScreen extends StatelessWidget {
                 vSpace(36),
                 SiginUpInputUserData(),
                 vSpace(41),
-                CustomElevatedButton(title: "Sign Up", onPressed: () {}),
+                CustomElevatedButton(
+                  title: "Sign Up",
+                  onPressed: () {
+                    _validateAndSignup(context);
+                  },
+                ),
                 vSpace(32),
                 EndScreen(isLoginScreen: false),
+                SignupBlockListener(),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+}
+
+void _validateAndSignup(BuildContext context) {
+  if (context.read<SignupCubit>().formKey.currentState!.validate()) {
+    context.read<SignupCubit>().emitSignupState();
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_app/core/styles/app_colors.dart';
+import 'package:project_app/features/auth/logic/cubit/signup_cubit.dart';
 
 class GenderDropDown extends StatefulWidget {
   const GenderDropDown({super.key});
@@ -27,6 +29,7 @@ class _GenderDropDownState extends State<GenderDropDown> {
       }).toList(),
       onChanged: (value) {
         setState(() {
+          context.read<SignupCubit>().selectedGender = value;
           selectedGender = value;
         });
       },
