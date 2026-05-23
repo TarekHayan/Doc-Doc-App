@@ -48,7 +48,7 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  bool isObscureText = false;
+  bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               });
             },
             icon: Icon(
-              isObscureText ? Icons.visibility : Icons.visibility_off,
+              isObscureText ? Icons.visibility_off : Icons.visibility,
               color: isObscureText
-                  ? AppColors.primaryColorBlue
-                  : AppColors.greyColor,
+                  ? AppColors.greyColor
+                  : AppColors.primaryColorBlue,
             ),
           ),
           validator: (value) {
