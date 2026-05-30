@@ -17,17 +17,17 @@ class SiginUpInputUserData extends StatelessWidget {
       key: context.read<SignupCubit>().formKey,
       child: Column(
         children: [
-          NameTextField(),
+          const NameTextField(),
           vSpace(16),
-          PhoneTextField(),
+          const PhoneTextField(),
           vSpace(16),
-          GenderTextField(),
+          const GenderTextField(),
           vSpace(16),
-          EmailTextField(),
+          const EmailTextField(),
           vSpace(16),
-          PasswordTextField(),
+          const PasswordTextField(),
           vSpace(16),
-          ConfirmPasswordTextField(),
+          const ConfirmPasswordTextField(),
         ],
       ),
     );
@@ -159,7 +159,7 @@ class GenderTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GenderDropDown();
+    return const GenderDropDown();
   }
 }
 

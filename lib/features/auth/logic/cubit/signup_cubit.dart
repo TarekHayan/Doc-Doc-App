@@ -12,7 +12,7 @@ part 'signup_cubit.freezed.dart';
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit(SignupRepo signupRepo)
     : _signupRepo = signupRepo,
-      super(SignupState.initial());
+      super(const SignupState.initial());
 
   String? selectedGender;
   String changeGender(String? value) {
@@ -33,7 +33,7 @@ class SignupCubit extends Cubit<SignupState> {
   final formKey = GlobalKey<FormState>();
   final SignupRepo _signupRepo;
   void emitSignupState() async {
-    emit(SignupState.loading());
+    emit(const SignupState.loading());
     final response = await _signupRepo.signUp(
       SignupRequestBody(
         email: emailController.text,

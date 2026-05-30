@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/core/widgets/app_custom_elvated_button.dart';
-import 'package:project_app/features/auth/data/models/login_request_body.dart';
 import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/end_screen.dart';
 import 'package:project_app/features/auth/ui/widgets/login_input_user_data.dart';
@@ -36,8 +35,8 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 vSpace(32),
-                EndScreen(isLoginScreen: true),
-                LoginBlockListener(),
+                const EndScreen(isLoginScreen: true),
+                const LoginBlockListener(),
               ],
             ),
           ),
