@@ -15,10 +15,10 @@ class LogInInputUserData extends StatelessWidget {
       key: context.read<LoginCubit>().formKey,
       child: Column(
         children: [
-          EmailTextField(),
+          const EmailTextField(),
           vSpace(16),
-          PasswordTextField(),
-          ForgetPasswordTextButton(),
+          const PasswordTextField(),
+          const ForgetPasswordTextButton(),
         ],
       ),
     );

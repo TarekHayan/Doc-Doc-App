@@ -19,7 +19,7 @@ class DoctorImageAndTitle extends StatelessWidget {
                 colors: [Colors.white, Colors.white.withOpacity(0.0)],
                 begin: AlignmentGeometry.bottomCenter,
                 end: AlignmentGeometry.topCenter,
-                stops: [0.14, 0.4],
+                stops: const [0.14, 0.4],
               ),
             ),
             child: Image.asset(Assets.assetsImagesDoctorImage),

@@ -1,13 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_app/core/helper/spacing.dart';
 import 'package:project_app/core/widgets/app_custom_elvated_button.dart';
-import 'package:project_app/features/auth/data/models/login_request_body.dart';
-import 'package:project_app/features/auth/data/models/signup_request_body.dart';
-import 'package:project_app/features/auth/logic/cubit/login_cubit.dart';
 import 'package:project_app/features/auth/logic/cubit/signup_cubit.dart';
 import 'package:project_app/features/auth/ui/widgets/end_screen.dart';
 import 'package:project_app/features/auth/ui/widgets/auth_screen_header.dart';
@@ -32,7 +27,7 @@ class SiginUpScreen extends StatelessWidget {
                       "Sign up now and start exploring all that our \n app has to offer. We're excited to welcome \n you to our community!",
                 ),
                 vSpace(36),
-                SiginUpInputUserData(),
+                const SiginUpInputUserData(),
                 vSpace(41),
                 CustomElevatedButton(
                   title: "Sign Up",
@@ -41,8 +36,8 @@ class SiginUpScreen extends StatelessWidget {
                   },
                 ),
                 vSpace(32),
-                EndScreen(isLoginScreen: false),
-                SignupBlockListener(),
+                const EndScreen(isLoginScreen: false),
+                const SignupBlockListener(),
               ],
             ),
           ),

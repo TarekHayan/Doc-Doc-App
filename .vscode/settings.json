@@ -5,5 +5,8 @@
     "**/*.gr.dart": true,
     "**/*.config.dart": true,
     "**/*.mocks.dart": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
   }
 }

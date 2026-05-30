@@ -6,7 +6,7 @@ import 'package:project_app/features/auth/data/repos/login_repo.dart';
 import 'package:project_app/features/auth/logic/cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginRepo) : super(LoginState.initial());
+  LoginCubit(this._loginRepo) : super(const LoginState.initial());
 
   final LoginRepo _loginRepo;
   TextEditingController emailController = TextEditingController();
@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
 
   void emitLoginState() async {
-    emit(LoginState.loading());
+    emit(const LoginState.loading());
     final response = await _loginRepo.login(
       LoginRequestBody(
         email: emailController.text,
