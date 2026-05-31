@@ -24,9 +24,9 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-        ruby-version: "3.2.3"
-        bundler-cache: true
-        working-directory: android
+          ruby-version: "3.2.3"
+          bundler-cache: true
+          working-directory: android
 
       - name: Build and Distribute to Firebase App Distribution
         env:
