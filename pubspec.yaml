@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ^3.10.8
@@ -31,24 +31,28 @@ dependencies:
   bloc: ^9.2.0
   cupertino_icons: ^1.0.8
   dio: ^5.9.2
+  firebase_core: ^4.9.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.1
   flutter_native_splash: ^2.4.7
-  freezed: ^3.2.5
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.2.4
   freezed_annotation: ^3.1.0
   get_it: ^9.2.1
   intl: ^0.20.2
   json_annotation: ^4.11.0
-  json_serializable: ^6.13.1
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.9.2
   retrofit_generator: ^10.2.5
-
 dev_dependencies:
+  build_runner: ^2.15.0
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  freezed: ^3.2.5
+  json_serializable: ^6.13.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -60,9 +64,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - android/fastlane/firebase_secure.env
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
@@ -86,3 +90,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/styles/
+  filename: images.dart
