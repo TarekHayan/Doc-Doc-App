@@ -3,7 +3,8 @@ default_platform(:android)
 platform :android do
   desc "link to firebase app distribution"
   lane :distribute do
-    
+    require 'dotenv'
+    Dotenv.load("firebase_secure.env")
     sh "flutter clean"
     sh "flutter pub get"
     sh "flutter build apk --release --flavor production -t lib/main_production.dart --no-tree-shake-icons"
